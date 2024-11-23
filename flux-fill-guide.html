@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="LIOR ROITER">
+    <meta name="creator" content="LIOR ROITER">
+    <meta name="description" content="FLUX DEV Installation Guide created by LIOR ROITER">
+    <title>FLUX DEV Guide</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --light-bg: #f3f4f6;
+            --border-color: #e5e7eb;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: #f9fafb;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 1rem;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            font-size: 2rem;
+            margin-top: 3rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .file-structure {
+            background-color: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .download-section {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 1rem 0;
+        }
+
+        .download-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .download-link:hover {
+            text-decoration: underline;
+        }
+
+        .path {
+            background-color: #e5e7eb;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .image-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-caption {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Make tables look better */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--light-bg);
+        }
+
+        /* Style for links */
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FLUX DEV: FILL (INPAINT / OUTPAINT), REDUX, CANNY, DEPTH</h1>
+
+        <h2>מבנה תיקיות ודוגמאות זרימה</h2>
+        <div class="file-structure" dir="ltr">
+FLUX FIL (INPAINING-OUTPAINING) +REDUX +CANNY +DEPTH/
+├── flux-fill-guide.html
+├── flux_fill_controlnet_example_workflow.json
+├── flux_fill_canny_example_workflow.json
+├── flux_fill_redux_example_workflow.json
+├── flux_fill_outpaint_example_workflow.json
+├── flux_fill_inpaint_example_workflow.json
+├── flux_fill_inpaint_example_workflow-crop&stitch.json
+├── flux_fill_depth_example_workflow.json
+├── flux-union-pro-controlnet-instantx-shakker-labs.json
+├── workflow screenshot/
+├── png original workflow/
+├── output
+├── input picture/
+└── readme.md</div>
+
+		<h2>ComfyUI_examples</h2>
+            <p><strong>לינק לדוגמאות:</strong><br>
+            <a href="https://comfyanonymous.github.io/ComfyUI_examples/flux/">
+               לחץ פה
+            </a></p>
+		<h2>Flux</h2>
+            <p><strong>הדף בגיטהאב:</strong><br>
+            <a href="https://github.com/black-forest-labs/flux">
+               לחץ פה
+            </a></p>			
+        <h2>מודלים בסיסיים</h2>
+
+        <div class="download-section">
+            <h3>FLUX1-DEV</h3>
+            <p><strong>קובץ:</strong> flux1-dev.safetensors</p>
+            <p><strong>לינק להורדה:</strong><br>
+            <a href="https://huggingface.co/black-forest-labs/FLUX.1-dev/blob/main/flux1-dev.safetensors" class="download-link">
+                https://huggingface.co/black-forest-labs/FLUX.1-dev/blob/main/flux1-dev.safetensors
+            </a></p>
+            <p><strong>לשמור בתיקיית:</strong><br>
+            <span class="path">ComfyUI_windows_portable\ComfyUI\models\unet</span></p>
+        </div>
+
+        <div class="download-section">
+            <h3>FLUX.1-schnell</h3>
+            <p><strong>קובץ:</strong> flux1-schnell.safetensors</p>
+            <p><strong>לינק להורדה:</strong><br>
+            <a href="https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/flux1-schnell.safetensors" class="download-link">
+                https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/flux1-schnell.safetensors
+            </a></p>
+            <p><strong>לשמור בתיקיית:</strong><br>
+            <span class="path">ComfyUI_windows_portable\ComfyUI\models\unet</span></p>
+        </div>
+
+    </div>
+    <div class="container">
+		<h2>Fill (Inpainting/ Outpainting) model</h2>
+        <div class="download-section">
+            <h3>Fill Model</h3>
+            <p><strong>קובץ:</strong> flux1-fill-dev.safetensors</p>
+            <p><strong>לינק להורדה:</strong><br>
+            <a href="https://huggingface.co/black-forest-labs/FLUX.1-Fill-dev/blob/main/flux1-fill-dev.safetensors" class="download-link">
+                https://huggingface.co/black-forest-labs/FLUX.1-Fill-dev/blob/main/flux1-fill-dev.safetensors
+            </a></p>
+            <p><strong>לשמור בתיקיית:</strong><br>
+            <span class="path">ComfyUI_windows_portable\ComfyUI\models\diffusion_models</span></p>
+        </div>
+		
+		<h2>דוגמאות תוצאות</h2>
+        <div class="image-grid">
+            <div class="image-card">
+                <img src="./png original workflow/flux_fill_inpaint_example_workflow.png" alt="דוגמה ל-Inpaint">
+                <div class="image-caption">דוגמה לתוצאת Inpaint</div>
+            </div>
+            <div class="image-card">
+                <img src="./png original workflow/flux_fill_outpaint_example_workflow.png" alt="דוגמה ל-Outpaint">
+                <div class="image-caption">דוגמה לתוצאת Outpaint</div>
+            </div>
+		</div>
+		
+
+        <h2>Redux</h2>
+        <div class="download-section">
+            <h3>Model Files</h3>
+            <div>
+                <h4>1. flux1-redux-dev.safetensors</h4>
+                <p><strong>לינק להורדה:</strong><br>
+                <a href="https://huggingface.co/black-forest-labs/FLUX.1-Redux-dev/blob/main/flux1-redux-dev.safetensors" class="download-link">
+                    https://huggingface.co/black-forest-labs/FLUX.1-Redux-dev/blob/main/flux1-redux-dev.safetensors
+                </a></p>
+                <p><strong>לשמור בתיקיית:</strong><br>
+                <span class="path">ComfyUI_windows_portable\ComfyUI\models\style_models</span></p>
+            </div>
+            
+            <div>
+                <h4>2. sigclip_vision_patch14_384.safetensors</h4>
+                <p><strong>לינק להורדה:</strong><br>
+                <a href="https://huggingface.co/Comfy-Org/sigclip_vision_384/blob/main/sigclip_vision_patch14_384.safetensors" class="download-link">
+                    https://huggingface.co/Comfy-Org/sigclip_vision_384/blob/main/sigclip_vision_patch14_384.safetensors
+                </a></p>
+                <p><strong>לשמור בתיקיית:</strong><br>
+                <span class="path">ComfyUI_windows_portable\ComfyUI\models\clip_vision</span></p>
+            </div>
+        </div>
+		
+		<h2>דוגמאות תוצאות</h2>
+        <div class="image-grid">
+            <div class="image-card">
+                <img src="./png original workflow/flux_redux_model_example.png" alt="דוגמה ל-Redux">
+                <div class="image-caption">דוגמה לתוצאת Redux</div>
+            </div>
+		</div>
+		
+        <h2>Canny and Depth</h2>
+        <div class="download-section">
+            <h3>Models</h3>
+            <div>
+                <h4>1. flux1-canny-dev.safetensors</h4>
+                <p><strong>לינק להורדה:</strong><br>
+                <a href="https://huggingface.co/black-forest-labs/FLUX.1-Canny-dev" class="download-link">
+                    https://huggingface.co/black-forest-labs/FLUX.1-Canny-dev
+                </a></p>
+                <p><strong>לשמור בתיקיית:</strong><br>
+                <span class="path">ComfyUI_windows_portable\ComfyUI\models\diffusion_models</span></p>
+            </div>
+
+            <div>
+                <h4>2. flux1-depth-dev.safetensors</h4>
+                <p><strong>לינק להורדה:</strong><br>
+                <a href="https://huggingface.co/black-forest-labs/FLUX.1-Depth-dev" class="download-link">
+                    https://huggingface.co/black-forest-labs/FLUX.1-Depth-dev
+                </a></p>
+                <p><strong>לשמור בתיקיית:</strong><br>
+                <span class="path">ComfyUI_windows_portable\ComfyUI\models\diffusion_models</span></p>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <h3>LoRA Files</h3>
+            <ul>
+                <li>flux1-canny-dev-lora.safetensors</li>
+                <li>flux1-depth-dev-lora.safetensors</li>
+            </ul>
+            <p><strong>לינק להורדה:</strong></p>
+            <ul>
+                <li><a href="https://huggingface.co/black-forest-labs/FLUX.1-Canny-dev-lora" class="download-link">
+                    https://huggingface.co/black-forest-labs/FLUX.1-Canny-dev-lora
+                </a></li>
+                <li><a href="https://huggingface.co/black-forest-labs/FLUX.1-Depth-dev-lora" class="download-link">
+                    https://huggingface.co/black-forest-labs/FLUX.1-Depth-dev-lora
+                </a></li>
+            </ul>
+            <p><strong>לשמור בתיקיית:</strong><br>
+            <span class="path">ComfyUI_windows_portable\ComfyUI\models\loras</span></p>
+        </div>
+		
+		
+		<h2>דוגמאות תוצאות</h2>
+		<div class="image-grid">
+            <div class="image-card">
+                <img src="./png original workflow/flux_canny_model_example.png" alt="דוגמה ל-Canny">
+                <div class="image-caption">דוגמה לשימוש ב-Canny</div>
+            </div>
+            <div class="image-card">
+                <img src="./png original workflow/flux_depth_lora_example.png" alt="דוגמה ל-Depth">
+                <div class="image-caption">דוגמה לשימוש ב-Depth</div>
+            </div>
+		</div>	
+		
+        <h2>Community Flux Controlnets</h2>
+        <p>XLab, InstantX ו-Shakker הוציאו מודלי CONTROLNET המותאמים ל-FLUX</p>
+
+        <div class="download-section">
+            <h3>InstantX Canny Model</h3>
+            <p><strong>קובץ:</strong> flux1-dev-fp8.safetensors</p>
+            <p><strong>לינק להורדה:</strong><br>
+            <a href="https://huggingface.co/lllyasviel/flux1_dev/blob/main/flux1-dev-fp8.safetensors" class="download-link">
+                https://huggingface.co/lllyasviel/flux1_dev/blob/main/flux1-dev-fp8.safetensors
+            </a></p>
+            <p><strong>לשמור בתיקיית:</strong><br>
+            <span class="path">ComfyUI_windows_portable\ComfyUI\models\checkpoints</span></p>
+        </div>
+		<h2>דוגמאות תוצאות</h2>
+            <div class="image-card">
+                <img src="./png original workflow/flux_controlnet_example.png" alt="דוגמה ל-ControlNet">
+                <div class="image-caption">דוגמה לשימוש ב-ControlNet</div>
+            </div>
+
+
+        <div class="download-section">
+            <h3>Additional Controlnet Files</h3>
+            
+            <h4>1. InstantX Canny</h4>
+            <p><strong>לינק להורדה:</strong><br>
+            <a href="https://huggingface.co/InstantX/FLUX.1-dev-Controlnet-Canny/blob/main/diffusion_pytorch_model.safetensors" class="download-link">
+                https://huggingface.co/InstantX/FLUX.1-dev-Controlnet-Canny/blob/main/diffusion_pytorch_model.safetensors
+            </a></p>
+            <p><strong>לשנות שם ל:</strong> instantx_flux_canny.safetensors</p>
+            <p><strong>לשמור בתיקיית:</strong><br>
+            <span class="path">ComfyUI_windows_portable\ComfyUI\models\controlnet</span></p>
+
+            <h4>2. Depth Controlnet</h4>
+            <p><strong>לינק להורדה:</strong><br>
+            <a href="https://huggingface.co/Shakker-Labs/FLUX.1-dev-ControlNet-Depth/blob/main/diffusion_pytorch_model.safetensors" class="download-link">
+                https://huggingface.co/Shakker-Labs/FLUX.1-dev-ControlNet-Depth/blob/main/diffusion_pytorch_model.safetensors
+            </a></p>
+            <p><strong>לשנות שם ל:</strong> Shakker-Labs/FLUX.1-dev-ControlNet-Depth.safetensors</p>
+            <p><strong>לשמור בתיקיית:</strong><br>
+            <span class="path">ComfyUI_windows_portable\ComfyUI\models\controlnet</span></p>
+
+            <h4>3. Union Controlnet</h4>
+            <p><strong>לינק להורדה:</strong><br>
+            <a href="https://huggingface.co/Shakker-Labs/FLUX.1-dev-ControlNet-Union-Pro/blob/main/diffusion_pytorch_model.safetensors" class="download-link">
+                https://huggingface.co/Shakker-Labs/FLUX.1-dev-ControlNet-Union-Pro/blob/main/diffusion_pytorch_model.safetensors
+            </a></p>
+            <p><strong>לשנות שם ל:</strong> FLUX.1-dev-ControlNet-Union-Pro.safetensors</p>
+            <p><strong>לשמור בתיקיית:</strong><br>
+            <span class="path">ComfyUI_windows_portable\ComfyUI\models\controlnet</span></p>
+        </div>
+		
+		<h2>דוגמאות תוצאות</h2>
+        <div class="image-grid">
+            <div class="image-card">
+                <img src="./output/union pro output_.png" alt="דוגמה ל-ControlNet-Union-Pro">
+                <div class="image-caption">דוגמה לתוצאת ControlNet-Union-Pro</div>
+            </div>
+		</div>
+		
+        <div class="download-section">
+            <h3>XLAB Controls</h3>
+            <p>קונטרולים נוספים של XLAB ניתן להוריד מכאן:</p>
+            <a href="https://huggingface.co/XLabs-AI/flux-controlnet-collections/tree/main" class="download-link">
+                https://huggingface.co/XLabs-AI/flux-controlnet-collections/tree/main
+            </a>
+        </div>
+
+        <h2>קישורים שימושיים</h2>
+        <div class="download-section">
+            <p><strong>דף ראשי של FLUX1:</strong><br>
+            <a href="https://huggingface.co/black-forest-labs" class="download-link">
+                https://huggingface.co/black-forest-labs
+            </a></p>
+        </div>
+
+        <h2>בונוס</h2>
+        <div class="download-section">
+            <p>חלק מקבצי הזרימה כוללים <strong>ComfyUI-Inpaint-CropAndStitch</strong> אשר נותן מיקוד כאשר משתמשים במסכה ותפקידו להתמקד רק באזור ולא לשנות פרטים אחרים בתמונת המקור.</p>
+            <p><strong>לינק להתקנה:</strong><br>
+            <a href="https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch" class="download-link">
+                https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch
+            </a><br>
+            או דרך המנג'ר</p>
+        </div>
+    </div>
+	<br>
+	<CENTER><h5>MADE BY LIOR ROITER</H></CENTER>
+</body>
+</html>
